@@ -5,6 +5,8 @@
   window.I18N = {
     en: {
       nav_home: "Home", nav_showcase: "Showcase", nav_sources: "Sources",
+      nav_all_projects: "← All projects",
+      site_name: "The Canadian AI Exposure Map", menu_label: "Menu",
       hero_kicker: "Open Nshipyard data story · October 2026",
       hero_title: "How many Canadian workers are highly exposed to AI, and where?",
       hero_lede: "We combined what public data exists: Anthropic's measurements of which tasks AI actually performs, Statistics Canada's worker and business surveys, and job-posting data. This page states what the evidence shows, what it cannot show, and which trades and skills the data points to.",
@@ -109,6 +111,8 @@
     },
     fr: {
       nav_home: "Accueil", nav_showcase: "Vitrine", nav_sources: "Sources",
+      nav_all_projects: "← Tous les projets",
+      site_name: "La carte canadienne de l'exposition à l'IA", menu_label: "Menu",
       hero_kicker: "Dossier de données Open Nshipyard · Octobre 2026",
       hero_title: "Combien de travailleurs canadiens sont fortement exposés à l'IA, et où se trouvent-ils ?",
       hero_lede: "Nous avons réuni les données publiques disponibles : les mesures d'Anthropic sur les tâches réellement effectuées par l'IA, les enquêtes de Statistique Canada auprès des travailleurs et des entreprises, et les données d'offres d'emploi. Cette page présente ce que les données montrent, ce qu'elles ne peuvent pas montrer, et les métiers et compétences qu'elles désignent.",
