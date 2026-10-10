@@ -1,0 +1,1 @@
+{"description":"Open Nshipyard data story: what public data reveals about AI's likely impact on work in Canada.","license":"MIT","name":"canada-ai-work","private":true,"scripts":{"build":"node build.js","serve":"npx serve out -l 3000"},"version":"1.0.0"}

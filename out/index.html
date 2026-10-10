@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Canadian AI Exposure Map · Open Nshipyard</title>
+<meta name="description" content="What public data reveals about AI's likely impact on work in Canada: which skills and trades are most at risk, and which are most likely to thrive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="wordmark" href="index.html" aria-label="Open Nshipyard home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#d80621" d="M12 1.5l1.9 4.6 4.7-1.7-1.3 4.2 4.9 1-3.6 2.9 3.1 3.2-4.7.3.4 4.8-2.6-2.5-.6 3.7h-.9l-.3 2h-.8l-.3-2h-.9l-.6-3.7-2.6 2.5.4-4.8-4.7-.3 3.1-3.2-3.6-2.9 4.9-1-1.3-4.2 4.7 1.7z"/></svg>
+      <span class="wordmark-name">Open Nshipyard</span>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="showcase.html" data-i18n="nav_showcase">Showcase</a>
+      <a href="#sources" class="hide-m" data-i18n="nav_sources">Sources</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="Language / Langue">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <span class="kicker" data-i18n="hero_kicker">Open Nshipyard data story · October 2026</span>
+      <h1 data-i18n="hero_title">How many Canadian workers are highly exposed to AI, and where?</h1>
+      <p class="lede" data-i18n="hero_lede">We combined what public data exists: Anthropic's measurements of which tasks AI actually performs, Statistics Canada's worker and business surveys, and job-posting data. This page states what the evidence shows, what it cannot show, and which trades and skills the data points to.</p>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num" data-i18n="s1_num">60%</div>
+          <div class="stat-label"><span data-i18n="s1_label">of Canadian workers are in highly AI-exposed occupations</span><em data-i18n="s1_src">StatCan, Mehdi and Morissette, 2024</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-i18n="s2_num">1 in 3</div>
+          <div class="stat-label"><span data-i18n="s2_label">workers used generative AI in the past year</span><em data-i18n="s2_src">StatCan worker survey, July 2026</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-i18n="s3_num">19.2%</div>
+          <div class="stat-label"><span data-i18n="s3_label">of businesses used AI to produce goods or deliver services</span><em data-i18n="s3_src">Canadian Survey on Business Conditions, Q2 2026</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-i18n="s4_num">~6%</div>
+          <div class="stat-label"><span data-i18n="s4_label">of AI-adopting firms reduced employment because of AI, steady across survey waves</span><em data-i18n="s4_src">CSBC, 2023 to 2026</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. ANTHROPIC -->
+  <section class="block">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec1_title">What Anthropic actually measured</h2>
+        <p class="section-sub" data-i18n="sec1_sub">Anthropic's Economic Index mapped millions of anonymized Claude conversations onto the U.S. Labor Department's O*NET task statements. That makes it a measure of <strong>observed use</strong>, not expert opinion. The March 2026 observed-exposure paper then combined that usage with theoretical task feasibility.</p>
+      </div>
+      <div class="chart-card">
+        <div class="chart-hed" data-i18n="ch1_hed">Observed AI task coverage by occupation</div>
+        <div id="chart-coverage"></div>
+        <div class="chart-note" data-i18n="ch1_note">About 30% of occupations register zero AI exposure: cooks, mechanics, bartenders, dishwashers.</div>
+        <div class="chart-source" data-i18n="ch1_src">Source: Anthropic, Massenkoff and McCrory, March 2026.</div>
+      </div>
+      <div class="chart-card warm">
+        <div class="chart-hed" data-i18n="ch7_hed">Assisting still dominates replacing</div>
+        <div id="chart-augauto"></div>
+        <div class="chart-note" data-i18n="ch7_note">Only about 6% of AI-adopting Canadian firms reduced employment because of AI, a figure steady across StatCan survey waves.</div>
+        <div class="chart-source" data-i18n="ch7_src">Sources: Anthropic Economic Index, January 2025; StatCan CSBC, 2023 to 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. EXPOSURE SPLIT -->
+  <section class="block">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec2_title">Who is exposed in Canada</h2>
+        <p class="section-sub" data-i18n="sec2_sub">StatCan's Mehdi and Morissette (2024) adapted the AI occupational exposure index to Canadian occupations, and split workers by whether AI is likely to <strong>augment</strong> or <strong>compete with</strong> them.</p>
+      </div>
+      <div class="chart-card">
+        <div class="chart-hed" data-i18n="ch4_hed">Exposure split of Canadian workers</div>
+        <div id="chart-split"></div>
+        <div class="chart-source" data-i18n="ch4_src">Source: Mehdi and Morissette, StatCan Economic and Social Reports, 2024.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ADOPTION -->
+  <section class="block">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec3_title">Adoption is climbing, unevenly</h2>
+        <p class="section-sub" data-i18n="sec3_sub">Business adoption tripled in two years, but it concentrates in information, finance, and professional services. Construction sits at 9.2% and agriculture at 4.5%.</p>
+      </div>
+      <div class="chart-card">
+        <div class="chart-hed" data-i18n="ch3a_hed">Firms using AI, % of businesses</div>
+        <div id="chart-firmtrend"></div>
+        <div class="chart-source" data-i18n="ch3_src">Source: StatCan, Canadian Survey on Business Conditions, tables 33-10-0825-01, 33-10-1004-01, 33-10-1167-01.</div>
+      </div>
+      <div class="chart-card warm">
+        <div class="chart-hed" data-i18n="ch3b_hed">Adoption by industry, Q2 2026</div>
+        <div id="chart-industry"></div>
+        <div class="chart-source" data-i18n="ch3_src">Source: StatCan, Canadian Survey on Business Conditions, tables 33-10-0825-01, 33-10-1004-01, 33-10-1167-01.</div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-hed" data-i18n="ch2_hed">Workers who used generative AI at work, by occupation group</div>
+        <div id="chart-workeruse"></div>
+        <div class="chart-note" data-i18n="ch2_note">Overall, about one in three Canadian workers used GenAI in the prior year. Public-sector employees: 41.2%, private sector: 33.4%.</div>
+        <div class="chart-source" data-i18n="ch2_src">Source: StatCan worker generative AI survey, July 30, 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. GEOGRAPHY -->
+  <section class="block">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec4_title">Where exposure concentrates</h2>
+        <p class="section-sub" data-i18n="sec4_sub">Indeed Hiring Lab scored Canadian metros by the share of local job-posting skills that generative AI could transform. Treat it as directional: the underlying skill-exposure data is U.S.-based.</p>
+      </div>
+      <div class="chart-card">
+        <div class="chart-hed" data-i18n="ch5_hed">Metro AI exposure index</div>
+        <div id="chart-metro"></div>
+        <div class="chart-note" data-i18n="ch5_note">Index built on U.S. skill data applied to Canadian postings. Quebec's seven CMAs averaged 49.7, the highest provincial average; Alberta averaged 45.7, the lowest.</div>
+        <div class="chart-source" data-i18n="ch5_src">Source: Indeed Hiring Lab, October 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ENTRY-LEVEL SQUEEZE -->
+  <section class="block">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec5_title">The entry-level squeeze</h2>
+        <p class="section-sub" data-i18n="sec5_sub">StatCan's Mehdi and Frenette (January 2026) found that in coding-intensive occupations, employment of workers under 30 stagnated from November 2022 to December 2025 while ages 30 to 49 kept growing. The mechanism is straightforward: firms keep the senior who directs the AI and stop hiring the junior whose tasks the AI now handles.</p>
+      </div>
+      <div class="chart-card warm">
+        <div class="chart-hed" data-i18n="ch6_hed">Indexed employment in coding occupations, Nov 2022 = 100</div>
+        <div id="chart-squeeze"></div>
+        <div class="chart-note" data-i18n="ch6_note">Lines illustrate StatCan's published finding (stagnation versus continued growth); they are not exact plotted points.</div>
+        <div class="chart-source" data-i18n="ch6_src">Source: Mehdi and Frenette, StatCan Economic and Social Reports, January 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. RANKINGS -->
+  <section class="block">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec6_title">At risk, and likely to thrive</h2>
+        <p class="section-sub" data-i18n="sec6_sub">A three-to-five-year view, combining observed task coverage, exposure scores, and Canada's occupational mix.</p>
+      </div>
+      <div class="rank-duo">
+        <div class="rank-card risk">
+          <h3 class="card-title" data-i18n="risk_title">Most at risk of substitution</h3>
+          <ol>
+            <li><span><b data-i18n="r1b">Data entry and office support</b><small data-i18n="r1s">67.1% observed task coverage, the highest measured clerical exposure.</small></span></li>
+            <li><span><b data-i18n="r2b">Customer service</b><small data-i18n="r2s">70.1% observed task coverage; chatbots already absorb routine tickets.</small></span></li>
+            <li><span><b data-i18n="r3b">Routine finance, accounting, bookkeeping</b><small data-i18n="r3s">Concentrated in Toronto's finance sector, which leads business AI adoption at 40.4%.</small></span></li>
+            <li><span><b data-i18n="r4b">Translation and bilingual services</b><small data-i18n="r4s">Language tasks are core LLM strengths; Ottawa-Gatineau demand is exposed.</small></span></li>
+            <li><span><b data-i18n="r5b">Junior and entry-level software development</b><small data-i18n="r5s">Under-30 coding employment stagnated after 2022 while senior hiring continued.</small></span></li>
+            <li><span><b data-i18n="r6b">Graphic design and routine content production</b><small data-i18n="r6s">WEF lists it among declining roles for the first time, linked to generative AI.</small></span></li>
+          </ol>
+        </div>
+        <div class="rank-card thrive">
+          <h3 class="card-title" data-i18n="thrive_title">Most likely to thrive</h3>
+          <ol>
+            <li><span><b data-i18n="t1b">Skilled trades: electricians, plumbers, carpenters, welders</b><small data-i18n="t1s">14.7% GenAI use in trades and transport; physical work stays grounded in the real world.</small></span></li>
+            <li><span><b data-i18n="t2b">Healthcare: nurses, nurse aides, personal support workers</b><small data-i18n="t2s">Accountability and physical care keep humans in the loop; nurse aides rank among top growing occupations.</small></span></li>
+            <li><span><b data-i18n="t3b">AI-augmented professionals</b><small data-i18n="t3s">Surgeons, judges, senior engineers: high exposure, high complementarity, where AI raises the expert's output.</small></span></li>
+            <li><span><b data-i18n="t4b">AI builders and AI-fluent operators</b><small data-i18n="t4s">AI-user roles grew by about 62,000 postings in 2025; the premium goes to people who direct the tools.</small></span></li>
+            <li><span><b data-i18n="t5b">Sales, commercialization, relationship roles</b><small data-i18n="t5s">Trust and persuasion resist automation; PwC finds exposed jobs adding empathy and judgement tasks 2.5x faster.</small></span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ELECTRICIANS SPOTLIGHT -->
+  <section class="block">
+    <div class="wrap">
+      <div class="spotlight">
+        <div class="narrow">
+          <h2 data-i18n="sec7_title">Electricians, specifically</h2>
+          <p class="section-sub" data-i18n="sec7_sub">The trade readers ask about most. The numbers say low direct AI risk, growing demand, and one real caveat.</p>
+        </div>
+        <div class="spot-facts">
+          <div class="spot-fact">
+            <div class="n" data-i18n="f1n">13%</div>
+            <p data-i18n="f1p">AI replacement risk score for electricians, versus 1% for plumbers and pipefitters and 1% for roofers. Source: Kickresume analysis of 756 jobs, September 2026.</p>
+          </div>
+          <div class="spot-fact">
+            <div class="n" data-i18n="f2n">18%</div>
+            <p data-i18n="f2p">of electrician tasks impacted by 2038 in an MDPI 2026 paper, with 14 of those 18 points being augmentation: load forecasting, remote diagnostics, design assistance.</p>
+          </div>
+          <div class="spot-fact">
+            <div class="n" data-i18n="f3n">+9%</div>
+            <p data-i18n="f3p">U.S. Bureau of Labor Statistics projects electrician employment growth 2025 to 2035: 75,900 new jobs and about 72,700 openings per year, partly driven by electricity demand from AI data centers.</p>
+          </div>
+        </div>
+        <p class="fine" data-i18n="spot_fine">Caveat: StatCan (Leanage and Mehdi, January 2026) finds skilled trades face lower AI exposure but higher conventional automation risk, especially industrial and electrical trades. Watch the robot, not the chatbot.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. AI POSTINGS -->
+  <section class="block">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec8_title">AI jobs are growing too</h2>
+        <p class="section-sub" data-i18n="sec8_sub">Canadian postings requiring AI skills rose from about 60,000 in 2024 to 129,000 in 2025, from 1.6% to 3.5% of all postings. AI-user roles, people applying AI inside existing business functions, grew by about 62,000.</p>
+      </div>
+      <div class="chart-card">
+        <div class="chart-hed" data-i18n="ch9_hed">Postings requiring AI skills, Canada</div>
+        <div id="chart-postings"></div>
+        <div class="chart-source" data-i18n="ch9_src">Source: PwC AI Jobs Barometer, Canada cut, 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. TRAINING -->
+  <section class="block">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec9_title">What training actually helps</h2>
+        <p class="section-sub" data-i18n="sec9_sub">Canadian sources converge on the same curriculum. It is not a coding bootcamp for everyone.</p>
+      </div>
+      <div class="curriculum">
+        <div class="cur-step">
+          <div class="step-n">01</div>
+          <h4 data-i18n="c1t">AI fluency inside your current job</h4>
+          <p data-i18n="c1p">Learn the tools on the job, alongside the technology. A TD Bank survey finds on-the-job training alongside the technology is the most effective format.</p>
+        </div>
+        <div class="cur-step">
+          <div class="step-n">02</div>
+          <h4 data-i18n="c2t">Judgement and relationship skills</h4>
+          <p data-i18n="c2p">Critical thinking, ethical judgement, relationship management. Institut du Quebec: stronger soft skills produce better prompts and better validation of AI output.</p>
+        </div>
+        <div class="cur-step">
+          <div class="step-n">03</div>
+          <h4 data-i18n="c3t">A license or credential where liability stays human</h4>
+          <p data-i18n="c3p">Healthcare, licensed trades, regulated professions. Where accountability cannot be automated, the credential is the moat.</p>
+        </div>
+        <div class="cur-step">
+          <div class="step-n">04</div>
+          <h4 data-i18n="c4t">Commercialization skills</h4>
+          <p data-i18n="c4p">Selling, scoping, and delivering work. RBC: demand is growing for coordination, social perceptiveness, and complex problem solving.</p>
+        </div>
+      </div>
+      <div class="chart-card warm" style="margin-top:22px">
+        <p style="margin:0;font-size:16px;line-height:1.7;color:var(--ink-65)" data-i18n="sec9_extra">The Future Skills Centre's IVADO program trained more than 3,000 workers with job-adapted AI courses, a self-diagnosis tool, and certification. The Centre's summary line: workers are replaced by other workers with better AI skills, not by AI alone. Policy Magazine's warning: Canada's workforce AI training is fragmented and not standardized, and SMEs lag behind.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. METHODOLOGY -->
+  <section class="block">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec10_title">Methodology and limits</h2>
+      </div>
+      <div class="two-col" style="margin-top:36px">
+        <div class="info-card">
+          <h3 data-i18n="meth_title">What this combines</h3>
+          <ul>
+            <li data-i18n="m1">Anthropic Economic Index usage data mapped to O*NET tasks: observed use across millions of conversations.</li>
+            <li data-i18n="m2">StatCan business surveys (CSBC, 2024 to 2026) and the July 2026 worker generative-AI survey.</li>
+            <li data-i18n="m3">StatCan analytical papers: Mehdi and Morissette (2024), Mehdi and Frenette (2026), Leanage and Mehdi (2026).</li>
+            <li data-i18n="m4">Job-posting data from Indeed Hiring Lab and PwC's AI Jobs Barometer.</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3 data-i18n="miss_title">What is still missing</h3>
+          <ul>
+            <li data-i18n="mi1">No Canada cut of Anthropic's Economic Index has ever been published.</li>
+            <li data-i18n="mi2">No public crosswalk links Canada's NOC occupation codes to O*NET task data.</li>
+            <li data-i18n="mi3">The Labour Force Survey does not ask workers about AI use on the job.</li>
+            <li data-i18n="mi4">AI-talent emigration is not measured at the occupation level.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. SOURCES -->
+  <section class="block" id="sources">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 data-i18n="sec11_title">Sources</h2>
+      </div>
+      <ul class="sources-list narrow">
+        <li><b>Anthropic</b>, "Which Economic Tasks are Performed with AI? Evidence from Millions of Claude Conversations." <span class="date">January 2025.</span></li>
+        <li><b>Anthropic</b>, task-level collaboration patterns (Claude 3.7 Sonnet window). <span class="date">March 2025.</span></li>
+        <li><b>Anthropic</b>, Massenkoff and McCrory, observed job-exposure paper. <span class="date">March 5, 2026.</span></li>
+        <li><b>Anthropic</b>, "Scenarios for our Economic Future." <span class="date">September 9, 2026.</span></li>
+        <li><b>Statistics Canada</b>, Canadian Survey on Business Conditions AI modules (tables 33-10-0825-01, 33-10-1004-01, 33-10-1167-01). <span class="date">Q2 2024, Q2 2025, Q2 2026.</span></li>
+        <li><b>Statistics Canada</b>, worker-level generative AI use survey. <span class="date">July 30, 2026.</span></li>
+        <li><b>Mehdi and Morissette</b>, "Experimental Estimates of Potential Artificial Intelligence Occupational Exposure in Canada," StatCan Economic and Social Reports. <span class="date">2024.</span></li>
+        <li><b>Mehdi and Frenette</b>, "Canadian employment trends in the era of generative artificial intelligence: Early evidence," StatCan. <span class="date">January 28, 2026.</span></li>
+        <li><b>Leanage and Mehdi</b>, "Potential occupational exposure to artificial intelligence and automation among certified journeypersons in Canada," StatCan. <span class="date">January 2026.</span></li>
+        <li><b>Indeed Hiring Lab</b>, Canadian metro AI-exposure analysis. <span class="date">October 2026.</span></li>
+        <li><b>PwC</b>, AI Jobs Barometer, Canada cut. <span class="date">2026.</span></li>
+        <li><b>Future Skills Centre / Conference Board of Canada</b>, "Understanding the Influence of AI on Employment." <span class="date">January 2026.</span></li>
+        <li><b>World Economic Forum</b>, Future of Jobs Report 2025. <span class="date">January 2025.</span></li>
+        <li><b>IMF</b>, "Gen-AI: Artificial Intelligence and the Future of Work," Staff Discussion Note 2024/001. <span class="date">January 2024.</span></li>
+        <li><b>Kickresume</b>, AI job-replacement risk analysis of 756 jobs. <span class="date">September 2026.</span> <b>MDPI</b>, 2026 paper on electrician task impact by 2038. <b>U.S. Bureau of Labor Statistics</b>, Occupational Outlook Handbook, electricians. <span class="date">2025 to 2035 projections.</span></li>
+        <li><b>RBC</b>, "Humans Wanted: How Canadian Youth Can Thrive in the Age of Disruption." <span class="date">March 2018.</span> <b>TD Bank</b> workforce AI training survey; <b>Institut du Québec</b> on soft skills and AI use; <b>Policy Magazine</b> on fragmented AI training in Canada.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p class="footer-note"><span data-i18n="footer_note">An Open Nshipyard data story. Independent research, not affiliated with any government. Figures come from public sources, cited with dates; estimates are labeled as estimates.</span><br><br><span data-i18n="footer_by">By Richardson Dackam</span> · <a href="https://x.com/richardsondx">x.com/richardsondx</a> · <a href="https://github.com/richardsondx">github.com/richardsondx</a></p>
+    <div class="lang-toggle" role="group" aria-label="Language / Langue">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+    </div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="charts.js"></script>
+<script>
+(function () {
+  function setLang(l) {
+    window.__lang = l;
+    document.documentElement.lang = l;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var v = window.I18N[l] && window.I18N[l][el.getAttribute("data-i18n")];
+      if (v != null) el.innerHTML = v;
+    });
+    document.querySelectorAll(".lang-toggle button").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === l ? "true" : "false");
+    });
+    try { localStorage.setItem("nshipyard-lang", l); } catch (e) {}
+    window.renderAllCharts();
+  }
+  document.querySelectorAll(".lang-toggle button").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
+  });
+  var saved = "en";
+  try { saved = localStorage.getItem("nshipyard-lang") || "en"; } catch (e) {}
+  setLang(saved === "fr" ? "fr" : "en");
+})();
+</script>
+</body>
+</html>
